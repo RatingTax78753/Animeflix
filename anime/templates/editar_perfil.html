@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    Animeflix - Editar Perfil
+{% endblock %}
+
+{% block head %}
+<style>
+    .form-text {
+      color: rgb(212 212 212);
+    }
+</style>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+    <header class="min-h-screen bg-black bg-opacity-75 bg-blend-overlay showcase flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'images/fundo.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+            <h2 class="text-2xl">{{ request.user.username }}</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Edite os campos abaixo para editar seu perfil</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <button class="bg-violet-700 py-1 px-3 text-white md:text-lg rounded-md" type="submit">Editar Perfil</button>
+            </form>
+            <small><a href="{% url 'anime:mudar_senha' %}">Quer mudar sua senha?</a></small>
+        </div>
+    </header>
+
+    {% block footer %}
+    {% endblock %}
+{% endblock %}
