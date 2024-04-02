@@ -92,7 +92,7 @@
                             Episódios:
                         </h2>
 
-                        {% for episodeo in object.episodios.all %}
+                        {% for episodeo in object.episodios.all|dictsort:'temporada.temporadas'|dictsort:'tipo' %}
                             <h3 class='py-3 text-lg border-neutral-800 border-b-2 episode-item' data-temporada-id="{{ episodeo.temporada.id }}" data-tipo="{{ episodeo.tipo }}">
                                 <a href="{{ episodeo.link }}">
                                     {% if episodeo.tipo == 'Abertura' %}
