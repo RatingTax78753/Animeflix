@@ -26,7 +26,7 @@
                 </h2>
 
                 <div class="flex flex-wrap items-center min-w-full movie_lis">
-                  {% for anime in object_list %}
+                  {% for anime in object_list|dictsort:'titulo' %}
                     <div class="m-4 bg-neutral-800 overflow-hidden flex-shrink-0 rounded-md cursor-pointer imagem-container h-72 w-56">
                         <a href="{% url 'anime:detalhes_anime' anime.pk %}">
                           <img src="{{ anime.thumb.url }}" class="rounded-md w-full h-full object-cover" alt="">
