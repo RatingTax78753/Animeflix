@@ -187,7 +187,7 @@
                       <section id="viewsection1" class="flex flex-nowrap items-center justify-center space-x-8">
                         <a href="#viewsection3" class="arrow__btn text-6xl page">‹</a>
 
-                        {% for anime in request.user.animes_vistos.all %}
+                        {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
                             {% if forloop.counter < 5 %}
                                 <div class="item h-72 w-56 m-4">
                                     <a href="{% url 'anime:detalhes_anime' anime.pk %}">
@@ -204,7 +204,7 @@
                           <section id="viewsection2" class="flex flex-nowrap items-center justify-center">
                               <a href="#viewsection1" class="arrow__btn text-6xl page">‹</a>
 
-                              {% for anime in request.user.animes_vistos.all %}
+                              {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
                                 {% if forloop.counter > 4 %}
                                     {% if forloop.counter < 9 %}
                                         <div class="item h-72 w-56 m-4">
@@ -225,7 +225,7 @@
                           <section id="viewsection3" class="flex flex-nowrap items-center justify-center">
                             <a href="#viewsection2" class="arrow__btn text-6xl">‹</a>
 
-                            {% for anime in request.user.animes_vistos.all %}
+                            {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
                                 {% if forloop.counter > 8 %}
                                     <div class="item h-72 w-56 m-4">
                                         <a href="{% url 'anime:detalhes_anime' anime.pk %}">
