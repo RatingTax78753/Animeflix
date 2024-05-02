@@ -13,3 +13,26 @@ body {
     background-color: #171717;
     color: #F3F4F6;
 }
+
+/* HEADER */
+header {
+    display: none;
+}
+
+/* FOOTER */
+footer {
+    background-color: #0A0A0A;
+    padding: 0.65rem 1.28rem;
+    font-size: 1.33rem;
+}
+
+footer ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+}
+
+section {
+    display: none;
+}
