@@ -1,5 +1,5 @@
-<style>
-    $itemGrow: 1.2;
+
+$itemGrow: 1.2;
 $duration: 250ms;
 
 .wrapper {
@@ -55,4 +55,3 @@ $duration: 250ms;
     display:none;
   }
 }
-</style>
