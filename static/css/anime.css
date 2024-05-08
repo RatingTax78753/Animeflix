@@ -1,0 +1,212 @@
+.secao-anime {
+    display: flex;
+    align-items: end;
+    padding: 3.9rem 6.1rem;
+    text-align: start;
+}
+
+.container-anime-display,
+.container-anime {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1.6rem;
+}
+
+.div-titulo-categorias,
+.div-topicos {
+    display: flex;
+    flex-flow: column;
+}
+
+h2 {
+    font-size: 2.76rem;
+}
+
+/* Seção Display */
+.secao-anime-display {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+    width: 100%;
+    height: 51.6rem;
+
+    &.home {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.container-anime-display .p-categorias {
+    font-size: 1.92rem;
+}
+
+.div-titulo-categorias {
+    align-items: start;
+    gap: 0.33rem;
+    text-align: start;
+}
+
+.div-titulo-normal,
+.titulo-G {
+    text-align: start;
+}
+
+.div-titulo-normal {
+    max-width: 60.5rem;
+}
+
+.titulo-G {
+    max-width: 75rem;
+
+    & h1{
+        font-size: 3.32rem;
+    }
+}
+
+.botao-play {
+    display: flex;
+    background-color: #F5F5F5;
+    color: #171717;
+    gap: 0.44rem;
+    padding: 1.28rem 3.9rem;
+
+    &:hover {
+        background-color: #171717;
+        color: #F5F5F5;
+        border: solid 0.1rem #F5F5F5;
+    }
+}
+/* Seção Topicos */
+.container-anime {
+    margin-left: 17.78rem;
+}
+
+.div-topicos {
+    gap: 3.12rem;
+    max-width: 91.74rem;
+    min-width: 91.74rem;
+}
+
+.div-topico {  
+    &,
+    & div,
+    & ul {
+        display: flex;
+        flex-flow: column;
+    }
+
+    & {
+        gap: 0.82rem;
+    }
+
+    & div {
+        gap: 0.33rem;
+        margin-left: 1.6rem;
+    }
+
+    & ul{
+        gap: 1.02rem;
+
+        & li{
+            margin-left: 1.6rem;
+            border-bottom: solid 0.2rem #262626;
+            padding: 0.65rem;
+        }
+    }
+}
+
+.div-topico-dropdown {
+    display: flex;
+    justify-content: space-between;
+    gap: 21.43rem;
+}
+
+.div-dropdowns {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+
+    & select {
+        padding: 0.52rem;
+        background-color: #262626;
+        color: #F5F5F5;
+        border-radius: 0.5rem;
+        cursor: pointer;
+    }
+}
+
+.default-dropdown-value {
+    color: #737373;
+}
+
+/* Wrapper */
+.secao-wrapper {
+    border-bottom: solid 0.4rem #262626;
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.titulo-wrapper {
+    padding: 2rem 7.63rem 0 11.92rem;
+}
+
+.titulo-carousel {
+    padding: 2rem 7.63rem 0 11.92rem;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 100%);
+    overflow: hidden;
+    scroll-behavior: smooth;
+
+    & section {
+        max-width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        padding: 0 2.5rem 2.5rem 2.5rem;
+        margin: 2rem 0;
+
+        & .item-wrapper {
+            height: 31.7rem;
+            width: 22.4rem;
+            
+        
+            & img{
+                width: 100%;
+                height: 100%;
+                border-radius: 1rem;
+                object-fit: fill;
+            }
+
+            &:hover {
+                transform: scale(1.1);
+                border-radius: 1rem;
+            }
+        }
+
+        & a {
+            height: 8rem;
+            width: 6rem;
+            z-index: 1;
+
+            & img {
+                width: 100%;
+                height: 100%;
+            }
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+

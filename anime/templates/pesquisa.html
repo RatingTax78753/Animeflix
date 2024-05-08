@@ -6,35 +6,38 @@
 {% endblock %}
 
 {% block head %}
-    <style>.imagem-container {
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.imagem-container:hover {
-  transform: scale(1.1);
-}
-    </style>
+  <link rel="stylesheet" href="{% static 'css/pesquisa.css' %}">
 {% endblock %}
 
 {% block main %}
-    <main class='bg-primary_black min-h-screen w-full'>
-        <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
-            <div class="p-8 w-10/12 relative" >
-                <h2 class="text-gray-200 text-2xl font-medium">
-                    Resultados da Busca:
-                </h2>
+    <section class="resultados">
+          <div>
+            {% if nenhum_resultado %}
+                <h1>Nenhum resultado encontrado para: <span>"{{ termo_pesquisa }}"</span></h1>
+                
+            {% else %}
+                {% if termo_pesquisa == None %}
+                  <h1>Resultados da Busca:  <span>" "</span></h1>
 
-                <div class="flex flex-wrap items-center min-w-full movie_lis">
-                  {% for anime in object_list|dictsort:'titulo' %}
-                    <div class="m-4 bg-neutral-800 overflow-hidden flex-shrink-0 rounded-md cursor-pointer imagem-container h-72 w-56">
-                        <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                          <img src="{{ anime.thumb.url }}" class="rounded-md w-full h-full object-cover" alt="">
-                        </a>
-                    </div>
-                  {% endfor %}
-                </div>
-            </div>
-        </section>
-    </main>
+                {% else %}
+                  {% if object_list|length > 1 %}
+                    <h1>Resultados da Busca: <span>"{{ termo_pesquisa }}"</span></h1>
+                    
+                  {% else %}
+                    <h1>Resultado da Busca: <span>"{{ termo_pesquisa }}"</span></h1>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+          </div>
+
+          <div class="div-grid">
+            {% for anime in object_list|dictsort:'titulo' %}
+              <div class="item">
+                  <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                    <img src="{{ anime.thumb.url }}" alt="Thumb {{ anime.titulo }}">
+                  </a>
+              </div>
+            {% endfor %}
+          </div>
+    </section>
 {% endblock %}

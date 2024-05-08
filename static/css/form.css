@@ -1,0 +1,86 @@
+.secao {
+    background-image: url('../images/fundo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-blend-mode: overlay;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+}
+
+form, 
+.div-form-campos,
+.div-form-campo,
+.div-form-campo-legenda {
+    display: flex;
+    flex-flow: column;
+}
+
+form {
+    gap: 3.9rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-form-campos {
+    gap: 2rem;
+    align-items: center;
+}
+
+.div-form-campo {
+    gap: 0.52rem;
+    align-items: start;
+}
+
+.div-form-campo label, 
+.div-form-campo input {
+    font-size: 1.6rem;
+    line-height: 1.3;
+}
+
+.div-form-campo label {
+    font-weight: 600;
+}
+
+.div-form-campo input{
+    padding: 0.65rem;
+    border-radius: 0.5rem;
+}
+
+.div-form-campo-legenda {
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-form {
+    padding: 1.02rem 1.6rem;
+}
+
+.legenda {
+    display: flex;
+    margin-top: 0.65rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.44rem;
+}
+
+.legenda {
+    &, 
+    & ul,
+    & a {
+        font-size: 1.33rem;
+        color: #D4D4D4;
+    }
+
+    & a:hover {
+        text-decoration: underline;
+        color: #F5F5F5;
+    }
+}
+
+

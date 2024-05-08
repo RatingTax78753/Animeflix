@@ -6,32 +6,30 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/wrapper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/anime.css' %}">
 {% endblock %}
 
 {% block main %}
-    <main class='bg-primary_black min-h-screen w-full'>
-        <section class="h-screen relative bg-black bg-opacity-50 bg-blend-overlay bg-no-repeat pb-8 pl-12 flex items-end bg-cover" style="background-image: url('{{ anime.background.url }}');">
-            <div>
-                {% if object.titulo|length > 10 %}
-                    {% if object.titulo|length > 35 %}
-                        <h2 class="text-4xl font-semibold text-white my-4">
-                            {{ object.titulo|slice:":60" }}...
-                        </h2>
-
-                    {% else %}
-                        <h2 class="text-5xl font-semibold text-white my-4">
+    <section class="secao secao-anime secao-anime-display" style="background-image: url('{{ anime.background.url }}');">
+        <div class="container-anime-display">
+            <div class="div-titulo-categorias">
+                {% if object.titulo|length > 50 %}
+                    <div class="titulo-G">
+                        <h1>
                             {{ object.titulo }}
-                        </h2>
-                    {% endif %}
-
+                        </h1>
+                    </div>
                 {% else %}
-                    <h2 class="text-6xl font-semibold text-white my-4">
-                        {{ object.titulo }}
-                    </h2>
+                    <div class="div-titulo-normal">
+                        <h1>
+                            {{ object.titulo }}
+                        </h1>
+                    </div>
                 {% endif %}
 
-                <p class=" w-11/12 md:w-10/12 font-medium text-white my-4 pl-1">
+                
+
+                <p class="p-categorias">
                     {% for categoria in object.categoria.all %}
                         {% if forloop.last %}
                             {{ categoria }}
@@ -40,155 +38,184 @@
                         {% endif %}
                     {% endfor %}
                 </p>
-
-                <div class="flex my-4">
-                    <a href="{{ object.episodios.first.link }}">
-                        <button class="flex items-center bg-white py-2 px-5 rounded-md" style='color:black;'>
-                            <ion-icon name="play" class="text-2xl"></ion-icon>
-                            <span class="ml-3 font-medium">
-                                Play
-                            </span>
-                        </button>
-                    </a>
-                </div>
             </div>
-        </section>
 
-        <section class='bg-primary_black flex justify-center pt-10 pb-16 border-neutral-800 border-b-4'>
-            <div class="p-8 w-10/12 relative" >
-                <div class="flex items-center">
-                    <h2 class="text-gray-200 text-3xl font-medium">
-                        Descrição:
-                    </h2>
-                    {% if object.episodios.all|length > 0 %}
-                        <div class="ml-auto text-neutral-300">
-                            <select id="tipoDropdown" class="ml-2 p-2 border rounded-md bg-neutral-800 ">
-                                <option class='text-neutral-500' value="all">Tipo</option>
+            {% if object.episodios.all %}
+                {% for episodeo in object.episodios.all|dictsort:'temporada.temporadas'|dictsort:'tipo' %}
+                    {% if episodeo.tipo == 'Abertura' and episodeo.temporada.temporadas == '1' %}
+                        <a class="botao botao-play" href="{{ episodeo.link }}">
+                            Play 
+                            <ion-icon name="play"></ion-icon>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+            {% else %}
+
+                <a class="botao botao-play" href="#">
+                    Play 
+                    <ion-icon name="play"></ion-icon>
+                </a>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="secao secao-anime">
+        <div class="container-anime">
+            <div class="div-topicos">
+                <div class="div-topico-dropdown">
+                    <div class="div-topico">
+                        <h2>
+                            Descrição:
+                        </h2>
+                    
+                        <div>
+                            <p>{{ object.descricao }}</p>
+                            <p>Visualizações: {{ object.visualizacoes }}</p>
+                        </div>
+                    </div>
+
+                    <div class="div-dropdowns">
+                        {% if object.episodios.all|length > 0 %}
+                            <select id="tipoDropdown">
+                                <option value="all" class="default-dropdown-value">Tipo</option>
                                 <option value="Abertura">Abertura</option>
                                 <option value="Encerramento">Encerramento</option>
                             </select>
-
-                            <select id="temporadaDropdown" class="ml-2 p-2 border rounded-md bg-neutral-800">
-                                <option class='text-neutral-500' value="all">Temporada</option>
+                            
+                            <select id="temporadaDropdown">
+                                <option value="all" class="default-dropdown-value">Temporada</option>
                                 {% for temporada in object.temporadas.all %}
                                     <option value="{{ temporada.id }}">{{ temporada.temporadas }}</option>
                                 {% endfor %}
                             </select>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
 
-                <div class="flex justify-left  items-center min-w-full  movie_lis">
-                    <p class="text-gray-100 text-lg">
-                        {{ object.descricao }}
-                        <br>
-                        Visualizacoes: {{ object.visualizacoes }}
-                    </p>
-                </div>
-
-                {% if object.episodios.all|length > 0 %}
-                    <div style='margin-top:2rem;margin-bottom:2rem;'>
-                        <h2 class="text-gray-200 text-3xl font-medium">
+                <div class="div-topico">
+                    {% if object.episodios.all|length > 0 %}
+                        <h2>
                             Episódios:
                         </h2>
 
-                        {% for episodeo in object.episodios.all|dictsort:'temporada.temporadas'|dictsort:'tipo' %}
-                            <h3 class='py-3 text-lg border-neutral-800 border-b-2 episode-item' data-temporada-id="{{ episodeo.temporada.id }}" data-tipo="{{ episodeo.tipo }}">
-                                <a href="{{ episodeo.link }}">
-                                    {% if episodeo.tipo == 'Abertura' %}
-                                        Abertura {{ episodeo.temporada }}: {{ episodeo.titulo }}
-                                    {% else %}
-                                        Encerramento {{ episodeo.temporada }}: {{ episodeo.titulo }}
-                                    {% endif %}
-                                </a>
-                            </h3>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                        <ul>
+                            {% for episodeo in object.episodios.all|dictsort:'titulo'|dictsort:'temporada.temporadas'|dictsort:'tipo' %}
+                                <li class="episode-item" data-temporada-id="{{ episodeo.temporada.id }}" data-tipo="{{ episodeo.tipo }}">
+                                    <a href="{{ episodeo.link }}">
+                                        {% if episodeo.tipo == 'Abertura' %}
+                                            Abertura | Temporada {{ episodeo.temporada }}: {{ episodeo.titulo }}
+                                        {% else %}
+                                            Encerramento | Temporada {{ episodeo.temporada }}: {{ episodeo.titulo }}
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        {% if Animes_Relacionados|length > 0 %}
-            <section class='bg-primary_black flex justify-center'>
-                <div class="p-8 w-10/12 relative" >
-                    <h2 class="text-gray-200 text-2xl font-medium">
-                        Relacionados:
-                    </h2>
+    {% if Animes_Relacionados|length > 0 %}
+        <section class="secao-wrapper">
+            <div>
+                <h2 class="titulo-wrapper">
+                    Populares:
+                </h2>
 
-                    <div class="wrapper">
-                      <section id="relsection1" class="flex flex-nowrap items-center justify-center space-x-8">
+                <div class="wrapper">
+                    <section id="relsection1">
                         {% if Animes_Relacionados|length > 4 %}
-                            <a href="#relsection2" class="arrow__btn text-6xl page">‹</a>
+                            {% if Animes_Relacionados|length > 8 %}
+                                <a href="#relsection3">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+
+                            {% else %}
+
+                                <a href="#relsection2">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+                            {% endif %}
                         {% endif %}
 
                         {% for anime in Animes_Relacionados %}
                             {% if forloop.counter < 5 %}
-                                <div class="item h-72 w-56 m-4">
+                                <div class="item-wrapper">
                                     <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                        <img src="{{ anime.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                                        <img src="{{ anime.thumb.url }}" alt="Thumb {{ anime.titulo }}">
                                     </a>
                                 </div>
                             {% endif %}
                         {% endfor %}
 
-                          {% if Animes_Relacionados|length > 4 %}
-                            <a href="#relsection2" class="arrow__btn text-6xl">›</a>
-                          {% endif %}
-                      </section>
-
                         {% if Animes_Relacionados|length > 4 %}
-                          <section id="relsection2" class="flex flex-nowrap items-center justify-center">
-                              <a href="#relsection1" class="arrow__btn text-6xl page">‹</a>
+                            <a href="#relsection2">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        {% endif %}
+                    </section> 
 
-                              {% for anime in Animes_Relacionados %}
+                    {% if Animes_Relacionados|length > 4 %}
+                        <section id="relsection2" >
+                            <a href="#relsection1">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
+
+                            {% for anime in Animes_Relacionados %}
                                 {% if forloop.counter > 4 %}
                                     {% if forloop.counter < 9 %}
-                                        <div class="item h-72 w-56 m-4">
+                                        <div class="item-wrapper">
                                             <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                                <img src="{{ anime.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                                                <img src="{{ anime.thumb.url }}">
                                             </a>
                                         </div>
                                     {% endif %}
                                 {% endif %}
-                              {% endfor %}
+                            {% endfor %}
 
-                              <a href="#relsection1" class="arrow__btn text-6xl">›</a>
-                          </section>
-                        {% endif %}
-                    </div>
+                            {% if Animes_Relacionados|length > 4 %}
+                                {% if Animes_Relacionados|length > 8 %}
+                                    <a href="#relsection3">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% else %}
+                                    <a href="#relsection1">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </section>
+                    {% endif %}
+
+                    {% if Animes_Relacionados|length > 8 %}
+                        <section id="relsection3" >
+                            <a href="#relsection2">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
+
+                            {% for anime in Animes_Relacionados %}
+                                {% if forloop.counter > 8 %}
+                                    <div class="item-wrapper">
+                                        <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                            <img src="{{ anime.thumb.url }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            <a href="#relsection1">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        </section>
+                    {% endif %}
                 </div>
-            </section>
-        {% endif %}
-    </main>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const dropdownTemporada = document.getElementById('temporadaDropdown');
-        const dropdownTipo = document.getElementById('tipoDropdown');
-        const episodes = document.querySelectorAll('.episode-item');
-
-        dropdownTemporada.addEventListener('change', filterEpisodes);
-        dropdownTipo.addEventListener('change', filterEpisodes);
-
-        function filterEpisodes() {
-            const selectedTemporada = dropdownTemporada.value;
-            const selectedTipo = dropdownTipo.value;
-
-            episodes.forEach(episode => {
-                const temporadaId = episode.getAttribute('data-temporada-id');
-                const tipo = episode.getAttribute('data-tipo');
-
-                const isTemporadaValid = selectedTemporada === 'all' || temporadaId === selectedTemporada;
-                const isTipoValid = selectedTipo === 'all' || tipo === selectedTipo;
-
-                if (isTemporadaValid && isTipoValid) {
-                    episode.style.display = 'block';
-                } else {
-                    episode.style.display = 'none';
-                }
-            });
-        }
-    });
-    </script>
-
+            </div>
+        </section>
+    {% endif %}
+    
+    <script src="{% static 'js/filterDropdown.js' %}"></script>
 {% endblock %}
+

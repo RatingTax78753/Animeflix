@@ -1,0 +1,40 @@
+.resultados {
+    padding: 3.12rem 11.92rem;
+
+    & h1 {
+        font-size: 3.32rem;
+
+        & span {
+            font-size: 2.76rem;
+        }
+    }
+
+    & .div-grid {
+        padding: 2rem 6.1rem 0 6.1rem;
+        display: grid;
+        grid-template-columns: repeat(4, 22.4rem);
+        gap: 2.5rem;
+        justify-items: center;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    
+        & .item {
+            height: 31.7rem;
+            width: 22.4rem;
+            
+            & img{
+                width: 100%;
+                height: 100%;
+                border-radius: 1rem;
+                object-fit: fill;
+            }
+    
+            &:hover {
+                transform: scale(1.1);
+                border-radius: 1rem;
+            }
+        }
+    }
+}
+

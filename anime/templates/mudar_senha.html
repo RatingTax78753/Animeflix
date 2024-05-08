@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+    Animeflix - Editar Perfil
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block main %}
+    <section class="secao">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                
+                <h1>Edite os campos abaixo para mudar sua senha</h1>
+                
+                <div class="div-form-campos"> 
+                    <div class="div-form-campo">
+                        <label for="old_password">Senha antiga:</label>
+                        <input type="password" name="old_password" id="old_password" placeholder="Senha antiga" autocomplete="current-password" autofocus required>
+                    </div>
+                
+                        
+                    <div class="div-form-campo-legenda">
+                        <div class="div-form-campo">
+                            <label for="new_password1" class="form-label requiredField">Nova senha:</label>
+                            <input type="password" name="new_password1" id="new_password1" placeholder="Nova senha" autocomplete="new-password" required>
+                            
+                        </div>
+
+                        <div class="legenda">
+                            <ul>
+                                <li>Sua senha não pode ser muito parecida com o resto das suas informações pessoais.</li>
+                                <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                                <li>Sua senha não pode ser uma senha comumente utilizada.</li>
+                                <li>Sua senha não pode ser inteiramente numérica.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="div-form-campo">
+                        <label for="new_password2" class="form-label requiredField">Confirmação da nova senha:</label>
+                        <input type="password" name="new_password2" id="new_password2" placeholder="Confirmação da senha" autocomplete="new-password" required>
+                    </div>
+                </div>
+                
+
+                <button class="botao-form" type="submit">Mudar Senha</button>
+            </form>
+    </section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

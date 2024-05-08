@@ -15,5 +15,5 @@ urlpatterns = [
     path('logout/', auth_view.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('perfil/edit/<int:pk>', EditarPerfil.as_view(), name='editar_perfil'),
     path('criarconta/', CriarConta.as_view(), name='criar_conta'),
-    path('changepassword/', auth_view.PasswordChangeView.as_view(template_name='editar_perfil.html', success_url=reverse_lazy('anime:home_animes')), name='mudar_senha')
+    path('changepassword/', auth_view.PasswordChangeView.as_view(template_name='mudar_senha.html', success_url=reverse_lazy('anime:home_animes')), name='mudar_senha')
 ]

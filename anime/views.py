@@ -56,14 +56,24 @@ class PesquisaAnime(LoginRequiredMixin, ListView):
     template_name = 'pesquisa.html'
     model = Anime
 
-    def get_queryset(self):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         termo_pesquisa = self.request.GET.get('query')
+    
         if termo_pesquisa:
             object_list = self.model.objects.filter(titulo__icontains=termo_pesquisa)
-            return object_list
+            context['termo_pesquisa'] = termo_pesquisa
         else:
             object_list = self.model.objects.all()
-            return object_list
+            context['termo_pesquisa'] = None
+        
+        if object_list.exists():
+            context['object_list'] = object_list
+        else:
+            context['nenhum_resultado'] = True
+            context['object_list'] = self.model.objects.all()
+
+        return context
 
 
 class EditarPerfil(LoginRequiredMixin, UpdateView):

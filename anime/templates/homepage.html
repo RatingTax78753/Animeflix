@@ -6,92 +6,87 @@
 {% endblock %}
 
 {% block head %}
-<style>
-    #id_email{
-    width: 100%;
-    color: #000000;
-    padding: 5px 5px;
-}
-</style>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 {% endblock %}
 
 {% block main %}
-    <header class="min-h-screen bg-black bg-opacity-50 bg-blend-overlay showcase border-neutral-800 border-b-4 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'images/fundo.jpg' %}');">
-        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+    <section class="secao secao1">
+        <div class="container container-secao1">
+            <div class="texto-secao1">
+                <h1>
+                    Aberturas e Encerramentos de Animes, tudo em um só lugar.
+                </h1>
 
-            <h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center">
-                Aberturas e Encerramentos de Animes da Animeflix, tudo em um só lugar.
-            </h1>
-            <h3 class="text-xl md:text-xl py-5">
-                Assista onde quiser. Cancele quando quiser.
-            </h3>
-            <h4 class="text-sm md:text-lg pb-3">
-                Quer começar? Coloque seu e-mail abaixo para acessar.
-            </h4>
+                <div class="subtitulo-secao1">
+                    <h2>
+                        Assista onde quiser. Cancele quando quiser.
+                    </h2>
 
-            <div class="w-full flex justify-center">
-                <div class="flex justify-center items-center w-11/12 md:w-10/12">
-                    <a href="{% url 'anime:login' %}">
-                        <button class="bg-violet-700 font-medium md:font-normal flex justify-center items-center py-2 px-3 md:px-0 rounded-br-sm rounded-tr-sm md:text-2xl" type="submit">
-                            <span>
-                                Acessar
-                            </span>
-
-                            <ion-icon name="chevron-forward-outline" class="text-2xl"></ion-icon>
-                        </button>
-                    </a>
-
+                    <h3>
+                        Quer começar? Coloque seu e-mail abaixo para acessar.
+                    </h3>
                 </div>
             </div>
-
-        </div>
-    </header>
-
-    <section class='flex flex-col md:flex-row items-center border-neutral-800 border-b-4' style="min-height: 70vh;">
-        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10 ">
-            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Anime Sem Propagandas
-            </h2>
-            <h5 class="md:text-xl text-lg">
-                Assista na Smart TV, Playstation, Xbox, Chromecast, Apple TV, tocadores de Blu-Ray e muito mais.
-            </h5>
-        </div>
-        <div class='md:w-1/2 flex justify-center items-center'>
-            <img src="{% static 'images/tv.png' %}" class="w-8/12" alt="">
+            
+            <a class="botao botao-acessar" href="{% url 'anime:login' %}">
+                <p>Acessar</p>
+    
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+            </a>
         </div>
     </section>
 
-    <section class='flex flex-col md:flex-row items-center border-neutral-800 border-b-4' style="min-height: 70vh;">
-        <div class='md:w-1/2 flex justify-center items-center '>
-            <img src="{% static 'images/cell.png' %}" class="w-8/12" alt="">
-        </div>
+    <section class="secao">
+        <div class="container container-resto-secoes">
+            <div class="texto-resto-secoes">
+                <h2>
+                    Anime Sem Propagandas
+                </h2>
+                <p>
+                    Assista na Smart TV, Playstation, Xbox, Chromecast, Apple TV, tocadores de Blu-Ray e muito mais.
+                </p>
+            </div>
 
-        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
-            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Offline Viewing
-            </h2>
-            <h5 class="md:text-xl text-lg">
-                Continue a assistir às suas séries favoritas mesmo longe de casa - obtenha Offline Viewing com um plano Mega Fan ou Ultimate Fan.
-            </h5>
+            <div class="imagem">
+                <img src="{% static 'images/tv.png' %}" alt="Televisão">
+            </div>
         </div>
-
     </section>
 
-    <section class='flex flex-col md:flex-row items-center border-neutral-900 border-b-4' style="min-height: 70vh;">
-        <div class="md:w-1/2 flex flex-col justify-center text-center md:text-left p-5 md:p-10">
-            <h2 class="md:text-5xl text-4xl font-semibold mb-4">
-                Aproveite mais com Premium
-            </h2>
-            <h5 class="md:text-xl text-lg">
-                Novos episódios logo após a exibição no Japão
+    <section class="secao">
+        <div class="container container-resto-secoes">
+            <div>
+                <img src="{% static 'images/wifi.svg' %}" alt="Símbolo Wifi Cortado">
+            </div>
 
-                Animes sem anúncios
-
-                Acesso simultâneo em múltiplas telas
-            </h5>
+            <div class="texto-resto-secoes">
+                <h2>
+                    Offline Viewing
+                </h2>
+                <p>
+                    Continue a assistir às suas séries favoritas mesmo longe de casa - obtenha Offline Viewing com um plano Mega Fan ou Ultimate Fan.
+                </p>
+            </div>
         </div>
-        <div class='md:w-1/2 flex justify-center items-center'>
-            <img src="{% static 'images/icon.png' %}" class="w-8/12" alt="">
+    </section>
+
+    <section class="secao">
+        <div class="container container-resto-secoes">
+            <div class="texto-resto-secoes">
+                <h2>
+                    Aproveite mais com Premium
+                </h2>
+                
+                <p>
+                    Novos episódios logo após a exibição no Japão
+                    Animes sem anúncios
+                    Acesso simultâneo em múltiplas telas
+                </p>
+            </div>
+            
+            <div>
+                <img src="{% static 'images/icon.png' %}" alt="Icone Animeflix">
+            </div>
         </div>
     </section>
 {% endblock %}

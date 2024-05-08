@@ -6,204 +6,98 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/wrapper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/anime.css' %}">
 {% endblock %}
 
 {% block main %}
-    <section>
-        <div>
-            {% if anime_destaque.titulo|length < 8 %}
-                <h2>
-                    {{ anime_destaque.titulo }}
-                </h2>
-            {% else %}
-                <h5>
-                    {{ anime_destaque.titulo }}
-                </h5>
-            {% endif %}
+    <section class="secao secao-anime secao-anime-display home" style="background-image: url('{{ anime_destaque.background.url }}');">
+        <div class="container-anime-display">
+            <div class="div-titulo-categorias">
+                {% if anime_destaque.titulo|length > 50 %}
+                    <div class="titulo-G">
+                        <h1>
+                            {{ anime_destaque.titulo }}
+                        </h1>
+                    </div>
+                {% else %}
+                    <div class="div-titulo-normal">
+                        <h1>
+                            {{ anime_destaque.titulo }}
+                        </h1>
+                    </div>
+                {% endif %}
 
-            <p>
-                {% for categoria in anime_destaque.categoria.all %}
-                    {% if forloop.last %}
-                        {{ categoria }}
-                    {% else %}
-                        {{ categoria }} |
-                    {% endif %}
-                {% endfor %}
-            </p>
+                
 
-            <div>
-                <a href="{% url 'anime:detalhes_anime' anime_destaque.pk %}">
-                    <button>
-                        <span>
-                            Acessar
-                        </span>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div>
-            <h2>
-                Novo:
-            </h2>
-
-            <div>
-                <section>
-                    <a href="#section3" class="page">‹</a>
-
-                    {% for anime in lista_animes_recentes %}
-                        {% if forloop.counter < 5 %}
-                            <div>
-                                <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                    <img src="{{ anime.thumb.url }}">
-                                </a>
-                            </div>
+                <p class="p-categorias">
+                    {% for categoria in anime_destaque.categoria.all %}
+                        {% if forloop.last %}
+                            {{ categoria }}
+                        {% else %}
+                            {{ categoria }} |
                         {% endif %}
                     {% endfor %}
-
-                    <a href="#section2">›</a>
-                </section>
-
-                {% if lista_animes_recentes|length > 4 %}
-                    <section>
-                        <a href="#section1" class="page">‹</a>
-
-                        {% for anime in lista_animes_recentes %}
-                            {% if forloop.counter > 4 %}
-                                {% if forloop.counter < 9 %}
-                                    <div>
-                                        <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                            <img src="{{ anime.thumb.url }}">
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-
-                        <a href="#section3">›</a>
-                    </section>
-                {% endif %}
-
-                {% if lista_animes_recentes|length > 8 %}
-                    <section>
-                        <a href="#section2">‹</a>
-
-                        {% for anime in lista_animes_recentes %}
-                            {% if forloop.counter > 8 %}
-                                <div>
-                                    <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                        <img src="{{ anime.thumb.url }}">
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-
-                        <a href="#section1">›</a>
-                    </section>
-                {% endif %}
+                </p>
             </div>
+
+
+            <a class="botao botao-play" href="{% url 'anime:detalhes_anime' anime_destaque.pk %}">
+                Acessar 
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+            </a>
         </div>
     </section>
 
-    <section>
-        <div>
-            <h2>
-                Populares:
-            </h2>
-
+    {% if lista_animes_recentes|length > 0 %}
+        <section class="secao-wrapper">
             <div>
-                <section>
-                    <a href="#popsection3" class="page">‹</a>
-
-                    {% for anime in lista_animes_popular %}
-                        {% if forloop.counter < 5 %}
-                            <div>
-                                <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                    <img src="{{ anime.thumb.url }}">
-                                </a>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-
-                    <a href="#popsection2">›</a>
-                </section>
-
-                {% if lista_animes_popular|length > 4 %}
-                    <section>
-                        <a href="#popsection1" class="page">‹</a>
-
-                        {% for anime in lista_animes_popular %}
-                            {% if forloop.counter > 4 %}
-                                {% if forloop.counter < 9 %}
-                                    <div>
-                                        <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                            <img src="{{ anime.thumb.url }}">
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-
-                        <a href="#popsection3">›</a>
-                    </section>
-                {% endif %}
-
-                {% if lista_animes_popular|length > 8 %}
-                    <section>
-                        <a href="#popsection2">‹</a>
-
-                        {% for anime in lista_animes_popular %}
-                            {% if forloop.counter > 8 %}
-                                <div>
-                                    <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                        <img src="{{ anime.thumb.url }}">
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-
-                        <a href="#popsection1">›</a>
-                    </section>
-                {% endif %}
-            </div>
-        </div>
-    </section>
-
-    {% if request.user.animes_vistos.all|length > 0 %}
-        <section>
-            <div>
-                <h2>
-                    Animes Vistos:
+                <h2 class="titulo-wrapper">
+                    Novos:
                 </h2>
 
-                <div>
-                    <section>
-                        <a href="#viewsection3" class="page">‹</a>
+                <div class="wrapper">
+                    <section id="section1">
+                        {% if lista_animes_recentes|length > 4 %}
+                            {% if lista_animes_recentes|length > 8 %}
+                                <a href="#section3">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
 
-                        {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
+                            {% else %}
+
+                                <a href="#section2">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% for anime in lista_animes_recentes %}
                             {% if forloop.counter < 5 %}
-                                <div>
+                                <div class="item-wrapper">
                                     <a href="{% url 'anime:detalhes_anime' anime.pk %}">
-                                        <img src="{{ anime.thumb.url }}">
+                                        <img src="{{ anime.thumb.url }}" alt="Thumb {{ anime.titulo }}">
                                     </a>
                                 </div>
                             {% endif %}
                         {% endfor %}
 
-                        <a href="#viewsection2">›</a>
-                    </section>
+                        {% if lista_animes_recentes|length > 4 %}
+                            <a href="#section2">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        {% endif %}
+                    </section> 
 
-                    {% if request.user.animes_vistos.all|length > 4 %}
-                        <section>
-                            <a href="#viewsection1" class="page">‹</a>
+                    {% if lista_animes_recentes|length > 4 %}
+                        <section id="section2" >
+                            <a href="#section1">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
 
-                            {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
+                            {% for anime in lista_animes_recentes %}
                                 {% if forloop.counter > 4 %}
                                     {% if forloop.counter < 9 %}
-                                        <div>
+                                        <div class="item-wrapper">
                                             <a href="{% url 'anime:detalhes_anime' anime.pk %}">
                                                 <img src="{{ anime.thumb.url }}">
                                             </a>
@@ -212,17 +106,29 @@
                                 {% endif %}
                             {% endfor %}
 
-                            <a href="#viewsection3">›</a>
+                            {% if lista_animes_recentes|length > 4 %}
+                                {% if lista_animes_recentes|length > 8 %}
+                                    <a href="#section3">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% else %}
+                                    <a href="#section1">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
                         </section>
                     {% endif %}
 
-                    {% if request.user.animes_vistos.all|length > 8 %}
-                        <section>
-                            <a href="#viewsection2">‹</a>
+                    {% if lista_animes_recentes|length > 8 %}
+                        <section id="section3" >
+                            <a href="#section2">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
 
-                            {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
+                            {% for anime in lista_animes_recentes %}
                                 {% if forloop.counter > 8 %}
-                                    <div>
+                                    <div class="item-wrapper">
                                         <a href="{% url 'anime:detalhes_anime' anime.pk %}">
                                             <img src="{{ anime.thumb.url }}">
                                         </a>
@@ -230,7 +136,205 @@
                                 {% endif %}
                             {% endfor %}
 
-                            <a href="#viewsection1">›</a>
+                            <a href="#section1">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        </section>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if lista_animes_popular|length > 0 %}
+        <section class="secao-wrapper">
+            <div>
+                <h2 class="titulo-wrapper">
+                    Populares:
+                </h2>
+
+                <div class="wrapper">
+                    <section id="popsection1">
+                        {% if lista_animes_popular|length > 4 %}
+                            {% if lista_animes_popular|length > 8 %}
+                                <a href="#popsection3">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+
+                            {% else %}
+
+                                <a href="#popsection2">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% for anime in lista_animes_popular %}
+                            {% if forloop.counter < 5 %}
+                                <div class="item-wrapper">
+                                    <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                        <img src="{{ anime.thumb.url }}" alt="Thumb {{ anime.titulo }}">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if lista_animes_popular|length > 4 %}
+                            <a href="#popsection2">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        {% endif %}
+                    </section> 
+
+                    {% if lista_animes_popular|length > 4 %}
+                        <section id="popsection2" >
+                            <a href="#popsection1">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
+
+                            {% for anime in lista_animes_popular %}
+                                {% if forloop.counter > 4 %}
+                                    {% if forloop.counter < 9 %}
+                                        <div class="item-wrapper">
+                                            <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                                <img src="{{ anime.thumb.url }}">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if lista_animes_popular|length > 4 %}
+                                {% if lista_animes_popular|length > 8 %}
+                                    <a href="#popsection3">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% else %}
+                                    <a href="#popsection1">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </section>
+                    {% endif %}
+
+                    {% if lista_animes_popular|length > 8 %}
+                        <section id="popsection3" >
+                            <a href="#popsection2">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
+
+                            {% for anime in lista_animes_popular %}
+                                {% if forloop.counter > 8 %}
+                                    <div class="item-wrapper">
+                                        <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                            <img src="{{ anime.thumb.url }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            <a href="#popsection1">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        </section>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {% if request.user.animes_vistos.all|length > 0 %}
+        <section class="secao-wrapper">
+            <div>
+                <h2 class="titulo-wrapper">
+                    Animes Vistos:
+                </h2>
+
+                <div class="wrapper">
+                    <section id="viewsection1">
+                        {% if request.user.animes_vistos.all|length > 4 %}
+                            {% if request.user.animes_vistos.all|length > 8 %}
+                                <a href="#viewsection3">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+
+                            {% else %}
+
+                                <a href="#viewsection2">
+                                    <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
+                            {% if forloop.counter < 5 %}
+                                <div class="item-wrapper">
+                                    <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                        <img src="{{ anime.thumb.url }}" alt="Thumb {{ anime.titulo }}">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if request.user.animes_vistos.all|length > 4 %}
+                            <a href="#viewsection2">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
+                        {% endif %}
+                    </section> 
+
+                    {% if request.user.animes_vistos.all|length > 4 %}
+                        <section id="viewsection2" >
+                            <a href="#viewsection1">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
+
+                            {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
+                                {% if forloop.counter > 4 %}
+                                    {% if forloop.counter < 9 %}
+                                        <div class="item-wrapper">
+                                            <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                                <img src="{{ anime.thumb.url }}">
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if request.user.animes_vistos.all|length > 4 %}
+                                {% if request.user.animes_vistos.all|length > 8 %}
+                                    <a href="#viewsection3">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% else %}
+                                    <a href="#viewsection1">
+                                        <img src="{% static 'images/setaProx.svg' %}" alt="Seta para Voltar">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </section>
+                    {% endif %}
+
+                    {% if request.user.animes_vistos.all|length > 8 %}
+                        <section id="viewsection3" >
+                            <a href="#viewsection2">
+                                <img src="{% static 'images/setaVoltar.svg' %}" alt="Seta para Voltar">
+                            </a>
+
+                            {% for anime in request.user.animes_vistos.all|dictsort:'titulo' %}
+                                {% if forloop.counter > 8 %}
+                                    <div class="item-wrapper">
+                                        <a href="{% url 'anime:detalhes_anime' anime.pk %}">
+                                            <img src="{{ anime.thumb.url }}">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            <a href="#viewsection1">
+                                <img src="{% static 'images/setaProx.svg' %}" alt="Seta para o Próximo">
+                            </a>
                         </section>
                     {% endif %}
                 </div>
@@ -238,3 +342,5 @@
         </section>
     {% endif %}
 {% endblock %}
+
+

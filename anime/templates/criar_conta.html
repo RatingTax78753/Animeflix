@@ -7,33 +7,67 @@
 {% endblock %}
 
 {% block head %}
-<style>
-    .form-text {
-      color: rgb(212 212 212);
-    }
-</style>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock %}
 
 {% block header %}
 {% endblock %}
 
 {% block main %}
-    <header class="min-h-screen bg-black bg-opacity-75 bg-blend-overlay showcase flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'images/fundo.jpg' %}');">
-        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+    <section class="secao">
+        <div class="container">
             <form method="post">
                 {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Crie uma conta para continuar</legend>
+        
+                <h1>Crie uma conta para continuar</h1>
 
-                    {{ form|crispy }}
-                </fieldset>
+                <div class="div-form-campos">
+                    <div class="div-form-campo-legenda">
+                        <div class="div-form-campo">
+                            <label for="username">Usuário:</label>
+                            <input type="text" name="username" id="username" placeholder="Nome de usuário" maxlength="150" autofocus required>
+                        </div>
 
-                <button class="bg-violet-700 py-1 px-3 text-white w-full md:text-lg rounded-md" type="submit">Criar Conta</button>
+                        <p class="legenda">Obrigatório. 150 caracteres ou menos. Letras, números e @/./+/-/_ apenas.</p>
+                    </div>
+
+                    <div class="div-form-campo">
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email" placeholder="E-mail" maxlength="320" required>
+                    </div>
+                    
+                    <div class="div-form-campo-legenda">
+                        <div class="div-form-campo">
+                            <label for="password1">Senha:</label>
+                            <input type="password" name="password1" id="password1" placeholder="Senha" autocomplete="new-password" required>
+                        </div>
+                    
+                        <div class="legenda">
+                            <ul>
+                                <li>Sua senha não pode ser muito parecida com o resto das suas informações pessoais.</li>
+                                <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                                <li>Sua senha não pode ser uma senha comumente utilizada.</li>
+                                <li>Sua senha não pode ser inteiramente numérica.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="div-form-campo-legenda">
+                        <div class="div-form-campo">
+                            <label for="password2">Confirmação de senha</label>
+                            <input type="password" name="password2" id="password2" placeholder="Confirmação de senha" autocomplete="new-password" required>
+                        </div>
+
+
+                        <p class="legenda">Informe a mesma senha informada anteriormente, para verificação.</p>
+                    </div>
+
+                    <button class="botao-form" type="submit">Criar Conta</button>
+                </div>
             </form>
-
         </div>
-    </header>
+    </section>
+{% endblock %}
 
-    {% block footer %}
-    {% endblock %}
+{% block footer %}
 {% endblock %}
